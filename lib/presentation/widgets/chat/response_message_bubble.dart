@@ -1,7 +1,9 @@
+import 'package:curso_flutter_yes_no_app/domain/entities/message.dart';
 import 'package:flutter/material.dart';
 
 class ResponseMessageBubble extends StatelessWidget {
-  const ResponseMessageBubble({super.key});
+  final Message message;
+  const ResponseMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +15,11 @@ class ResponseMessageBubble extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
               color: colors.secondary, borderRadius: BorderRadius.circular(20)),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              "Necesito que vengas a laburar el domingo",
-              style: TextStyle(color: Colors.white),
+              message.text,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
