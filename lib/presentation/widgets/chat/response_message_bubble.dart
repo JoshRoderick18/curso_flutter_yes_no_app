@@ -25,8 +25,6 @@ class ResponseMessageBubble extends StatelessWidget {
           height: 5,
         ),
         _ImageBubble(),
-
-        // TODO: Add the image
       ],
     );
   }
@@ -35,7 +33,25 @@ class ResponseMessageBubble extends StatelessWidget {
 class _ImageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-        "https://yesno.wtf/assets/no/29-6bf57c5bf3fed2dcdbed64afff7a7930.gif");
+    final size = MediaQuery.of(context).size;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.network(
+        "https://yesno.wtf/assets/no/29-6bf57c5bf3fed2dcdbed64afff7a7930.gif",
+        width: size.width * 0.7,
+        height: 150,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Container(
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: const Text("Jefazo esta enviando un mensaje..."),
+          );
+        },
+      ),
+    );
   }
 }
